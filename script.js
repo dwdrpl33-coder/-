@@ -5,7 +5,7 @@
 
 /* ---------- CONFIG: fill these in ---------- */
 // מספר הוואטסאפ העסקי בפורמט בינלאומי ללא + או 00, לדוגמה "972501234567"
-const WHATSAPP_NUMBER = "PASTE_PHONE_NUMBER_HERE";
+const WHATSAPP_NUMBER = 972552876019;
 
 // כתובת ה-webhook של n8n שמקבל את פניות הטופס
 const N8N_WEBHOOK_URL = "https://n8n-production-3818.up.railway.app/webhook/df88f21d-6a5b-4a72-bc00-bf236b8af24c";
