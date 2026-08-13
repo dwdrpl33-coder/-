@@ -82,5 +82,5 @@ const N8N_WEBHOOK_URL = "https://n8n-production-3818.up.railway.app/webhook/df88
 ## הערות טכניות
 
 - אין תלות ב-npm/build — כל הקבצים סטטיים לחלוטין, כולל ה-SDK של Supabase שנטען מ-CDN.
-- תמונות המוצרים/ההירו נטענות מ-[picsum.photos](https://picsum.photos) עם seed קבוע לכל תמונה (כך שהן עקביות בכל טעינה). אפשר להחליף לתמונות אמיתיות מ-unsplash.com או תמונות מוצר אמיתיות — פשוט להחליף את כתובות ה-`image` בטבלת `site_content` או ב-`script.js`.
+- תמונות המוצרים, ה-Hero והאודות נטענות מ-[images.unsplash.com](https://unsplash.com) עם ID קבוע לכל תמונה, נבחר כך שיתאים לסוג הרהיט שהוא מייצג (ספה, שולחן אוכל, כורסה וכו'). תמונות האווטארים בהמלצות עדיין מ-[picsum.photos](https://picsum.photos) (אלה רק דיוקנאות placeholder, לא תלויות תוכן). בכל שלב אפשר להחליף לתמונות מוצר אמיתיות — פשוט להחליף את כתובות ה-`image` בטבלת `site_content` (או ב-`script.js` לתוכן ברירת המחדל).
 - מפתח ה-`anon key` של Supabase מיועד לשימוש בצד לקוח (ציבורי) — זה בטוח כל עוד מדיניות ה-RLS מוגדרת נכון (כפי שמוגדר ב-`setup.sql`).

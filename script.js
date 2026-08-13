@@ -5,7 +5,7 @@
 
 /* ---------- CONFIG: fill these in ---------- */
 // מספר הוואטסאפ העסקי בפורמט בינלאומי ללא + או 00, לדוגמה "972501234567"
-const WHATSAPP_NUMBER = 972552876019;
+const WHATSAPP_NUMBER = "PASTE_PHONE_NUMBER_HERE";
 
 // כתובת ה-webhook של n8n שמקבל את פניות הטופס
 const N8N_WEBHOOK_URL = "https://n8n-production-3818.up.railway.app/webhook/df88f21d-6a5b-4a72-bc00-bf236b8af24c";
@@ -33,14 +33,14 @@ const DEFAULT_CONTENT = {
     secondary: "#b8935f"
   },
   products: [
-    { id: "nova", name: 'ספת "נובה" תלת מושבית', price: "7,890", description: "בד בוקלה קרם על מסגרת עץ אלון מלא, רגלי עץ טורנד.", image: "https://picsum.photos/seed/hamilton-sofa-nova/600/450" },
-    { id: "kidron", name: 'שולחן אוכל "קדרון"', price: "5,450", description: "עץ אלון מלא בגימור שמן טבעי, ל-8 סועדים.", image: "https://picsum.photos/seed/hamilton-table-kidron/600/450" },
-    { id: "alon", name: 'כורסת "אלון"', price: "3,200", description: "עור טבעי בגוון קוניאק, מסגרת עץ אלון גלויה.", image: "https://picsum.photos/seed/hamilton-armchair-alon/600/450" },
-    { id: "tavor", name: 'מזנון "טבעון"', price: "4,750", description: "עץ אגוז עם ידיות פליז מוברש, שלוש דלתות.", image: "https://picsum.photos/seed/hamilton-sideboard-tavor/600/450" },
-    { id: "yaara", name: 'שולחן קפה "יערה"', price: "1,980", description: "עץ זית מלא ומשטח שיש טבעי.", image: "https://picsum.photos/seed/hamilton-coffee-yaara/600/450" },
-    { id: "choresh", name: 'מיטה זוגית "חורש"', price: "6,300", description: "מסגרת עץ מלא, ראש מיטה מרופד בבד פשתן.", image: "https://picsum.photos/seed/hamilton-bed-choresh/600/450" },
-    { id: "dafna", name: 'כיסא אוכל "דפנה" (זוג)', price: "2,150", description: "עץ אלון ובד פשתן טבעי, נמכר בזוגות.", image: "https://picsum.photos/seed/hamilton-chair-dafna/600/450" },
-    { id: "zayit", name: 'ארונית לילה "זית"', price: "1,450", description: "עץ זית מלא בגימור שמן, מגירה אחת.", image: "https://picsum.photos/seed/hamilton-nightstand-zayit/600/450" }
+    { id: "nova", name: 'ספת "נובה" תלת מושבית', price: "7,890", description: "בד בוקלה קרם על מסגרת עץ אלון מלא, רגלי עץ טורנד.", image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80" },
+    { id: "kidron", name: 'שולחן אוכל "קדרון"', price: "5,450", description: "עץ אלון מלא בגימור שמן טבעי, ל-8 סועדים.", image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80" },
+    { id: "alon", name: 'כורסת "אלון"', price: "3,200", description: "עור טבעי בגוון קוניאק, מסגרת עץ אלון גלויה.", image: "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&q=80" },
+    { id: "tavor", name: 'מזנון "טבעון"', price: "4,750", description: "עץ אגוז עם ידיות פליז מוברש, שלוש דלתות.", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80" },
+    { id: "yaara", name: 'שולחן קפה "יערה"', price: "1,980", description: "עץ זית מלא ומשטח שיש טבעי.", image: "https://images.unsplash.com/photo-1592229505726-ca121723b8ef?auto=format&fit=crop&w=800&q=80" },
+    { id: "choresh", name: 'מיטה זוגית "חורש"', price: "6,300", description: "מסגרת עץ מלא, ראש מיטה מרופד בבד פשתן.", image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80" },
+    { id: "dafna", name: 'כיסא אוכל "דפנה" (זוג)', price: "2,150", description: "עץ אלון ובד פשתן טבעי, נמכר בזוגות.", image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=80" },
+    { id: "zayit", name: 'ארונית לילה "זית"', price: "1,450", description: "עץ זית מלא בגימור שמן, מגירה אחת.", image: "https://images.unsplash.com/photo-1591129841117-3adfd313e34f?auto=format&fit=crop&w=800&q=80" }
   ]
 };
 
@@ -72,6 +72,15 @@ function applyTheme(theme) {
   document.documentElement.style.setProperty("--color-primary-dark", shadeColor(theme.primary, -14));
 }
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function shadeColor(hex, percent) {
   const num = parseInt(hex.replace("#", ""), 16);
   const amt = Math.round(2.55 * percent);
@@ -83,16 +92,22 @@ function shadeColor(hex, percent) {
 
 function renderProducts(products) {
   const grid = document.getElementById("products-grid");
-  grid.innerHTML = products.map(p => `
+  grid.innerHTML = products.map(p => {
+    const active = interestList.includes(p.id);
+    return `
     <article class="product-card reveal">
-      <div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>
+      <div class="product-image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy"></div>
       <div class="product-body">
-        <h3>${p.name}</h3>
-        <p>${p.description}</p>
-        <span class="product-price">₪${p.price}</span>
+        <h3>${escapeHtml(p.name)}</h3>
+        <p>${escapeHtml(p.description)}</p>
+        <span class="product-price">₪${escapeHtml(p.price)}</span>
+        <button class="btn-interest${active ? " active" : ""}" data-interest-toggle="${escapeHtml(p.id)}">
+          ${active ? "✓ ברשימת העניין" : "+ הוספה לרשימת העניין"}
+        </button>
       </div>
     </article>
-  `).join("");
+  `;
+  }).join("");
   observeReveal();
 }
 
@@ -205,6 +220,132 @@ function setFormFeedback(el, text, type) {
 }
 
 /* ==========================================================================
+   Interest list — lightweight "wishlist" for browsing/comparing products.
+   No cart/checkout: this is a lead-gen tool, sends the selection via the
+   existing contact form (n8n) or WhatsApp, not a real purchase flow.
+   ========================================================================== */
+const INTEREST_STORAGE_KEY = "hamilton-interest-list";
+let interestList = loadInterestList();
+
+function loadInterestList() {
+  try {
+    const raw = localStorage.getItem(INTEREST_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+function saveInterestList() {
+  localStorage.setItem(INTEREST_STORAGE_KEY, JSON.stringify(interestList));
+}
+
+function toggleInterest(productId) {
+  const idx = interestList.indexOf(productId);
+  if (idx >= 0) interestList.splice(idx, 1);
+  else interestList.push(productId);
+  saveInterestList();
+  updateInterestButton(productId);
+  renderInterestBadge();
+  renderInterestPanel();
+}
+
+function updateInterestButton(productId) {
+  const btn = document.querySelector(`[data-interest-toggle="${productId}"]`);
+  if (!btn) return;
+  const active = interestList.includes(productId);
+  btn.classList.toggle("active", active);
+  btn.textContent = active ? "✓ ברשימת העניין" : "+ הוספה לרשימת העניין";
+}
+
+function getInterestProducts() {
+  return siteContent.products.filter(p => interestList.includes(p.id));
+}
+
+function renderInterestBadge() {
+  document.getElementById("interest-count").textContent = interestList.length;
+}
+
+function renderInterestPanel() {
+  const body = document.getElementById("interest-panel-body");
+  const items = getInterestProducts();
+  if (!items.length) {
+    body.innerHTML = `<p class="interest-empty">עדיין לא הוספתם פריטים. לחצו על "הוספה לרשימת העניין" בכרטיס המוצר.</p>`;
+    return;
+  }
+  body.innerHTML = items.map(p => `
+    <div class="interest-item">
+      <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}">
+      <div class="interest-item-info">
+        <strong>${escapeHtml(p.name)}</strong>
+        <span>₪${escapeHtml(p.price)}</span>
+      </div>
+      <button class="interest-item-remove" data-interest-remove="${escapeHtml(p.id)}" aria-label="הסרה">✕</button>
+    </div>
+  `).join("");
+}
+
+function buildInterestMessage() {
+  const items = getInterestProducts();
+  const lines = items.map(p => `- ${p.name} (₪${p.price})`);
+  return `היי, אשמח לקבל הצעת מחיר עבור הפריטים הבאים:\n${lines.join("\n")}`;
+}
+
+const interestFloatBtn = document.getElementById("interest-float");
+const interestPanel = document.getElementById("interest-panel");
+const interestPanelBackdrop = document.getElementById("interest-panel-backdrop");
+const interestPanelClose = document.getElementById("interest-panel-close");
+const productsGrid = document.getElementById("products-grid");
+
+function openInterestPanel() {
+  interestPanel.hidden = false;
+  interestPanelBackdrop.hidden = false;
+  setTimeout(() => interestPanel.setAttribute("data-open", "true"), 10);
+  renderInterestPanel();
+}
+function closeInterestPanel() {
+  interestPanel.setAttribute("data-open", "false");
+  setTimeout(() => { interestPanel.hidden = true; interestPanelBackdrop.hidden = true; }, 400);
+}
+
+interestFloatBtn.addEventListener("click", openInterestPanel);
+interestPanelClose.addEventListener("click", closeInterestPanel);
+interestPanelBackdrop.addEventListener("click", closeInterestPanel);
+
+// Event delegation: the products grid is re-rendered on load/admin save,
+// so we bind once on the static container rather than per product-card.
+productsGrid.addEventListener("click", (e) => {
+  const toggleBtn = e.target.closest("[data-interest-toggle]");
+  if (toggleBtn) toggleInterest(toggleBtn.getAttribute("data-interest-toggle"));
+});
+
+document.getElementById("interest-panel-body").addEventListener("click", (e) => {
+  const removeBtn = e.target.closest("[data-interest-remove]");
+  if (removeBtn) toggleInterest(removeBtn.getAttribute("data-interest-remove"));
+});
+
+document.getElementById("interest-clear").addEventListener("click", () => {
+  interestList = [];
+  saveInterestList();
+  renderProducts(siteContent.products);
+  renderInterestBadge();
+  renderInterestPanel();
+});
+
+document.getElementById("interest-send-form").addEventListener("click", () => {
+  if (!getInterestProducts().length) return;
+  document.getElementById("field-message").value = buildInterestMessage();
+  closeInterestPanel();
+  document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+  document.getElementById("field-name").focus();
+});
+
+document.getElementById("interest-send-whatsapp").addEventListener("click", () => {
+  if (!getInterestProducts().length) return;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildInterestMessage())}`;
+  window.open(url, "_blank", "noopener");
+});
+
+/* ==========================================================================
    Admin: login modal
    ========================================================================== */
 const adminEntryBtn = document.getElementById("admin-entry");
@@ -248,7 +389,7 @@ const adminLogoutBtn = document.getElementById("admin-logout");
 function showAdminPanel() {
   adminPanel.hidden = false;
   adminPanelBackdrop.hidden = false;
-  requestAnimationFrame(() => adminPanel.setAttribute("data-open", "true"));
+  setTimeout(() => adminPanel.setAttribute("data-open", "true"), 10);
   populateAdminForm();
 }
 function hideAdminPanel() {
@@ -293,19 +434,15 @@ function renderAdminProducts() {
     <div class="admin-product-item" data-index="${i}">
       <div class="product-index">מוצר ${i + 1}</div>
       <label>שם</label>
-      <input type="text" class="p-name" value="${escapeAttr(p.name)}">
+      <input type="text" class="p-name" value="${escapeHtml(p.name)}">
       <label>מחיר (₪)</label>
-      <input type="text" class="p-price" value="${escapeAttr(p.price)}">
+      <input type="text" class="p-price" value="${escapeHtml(p.price)}">
       <label>תיאור</label>
-      <textarea class="p-description" rows="2">${p.description}</textarea>
+      <textarea class="p-description" rows="2">${escapeHtml(p.description)}</textarea>
       <label>קישור לתמונה</label>
-      <input type="url" class="p-image" value="${escapeAttr(p.image)}">
+      <input type="url" class="p-image" value="${escapeHtml(p.image)}">
     </div>
   `).join("");
-}
-
-function escapeAttr(str) {
-  return String(str).replace(/"/g, "&quot;");
 }
 
 async function saveSection(key, value, feedbackEl) {
@@ -368,6 +505,7 @@ document.querySelectorAll("[data-save]").forEach(btn => {
 document.getElementById("footer-year").textContent = new Date().getFullYear();
 setupWhatsApp();
 observeReveal();
+renderInterestBadge();
 loadSiteContent();
 
 // If an admin is already logged in on page load, reveal the entry point immediately

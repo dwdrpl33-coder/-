@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="המילטון עיצוב | רהיטי יוקרה בעבודת יד">
 <meta property="og:description" content="עץ מלא, גימור אישי וליווי צמוד לבית שמספר את הסיפור שלכם.">
-<meta property="og:image" content="https://picsum.photos/seed/hamilton-hero/1200/630">
+<meta property="og:image" content="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&h=630&q=80">
 <meta property="og:locale" content="he_IL">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236b4f3b'/%3E%3Ctext x='32' y='45' font-size='34' font-family='Georgia,serif' fill='%23d9b877' text-anchor='middle'%3E%D7%94%3C/text%3E%3C/svg%3E">
@@ -52,7 +52,7 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
-    <div class="hero-bg" style="background-image:url('https://picsum.photos/seed/hamilton-hero/1600/1000')"></div>
+    <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=80')"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-content reveal">
       <p class="eyebrow">סטודיו לרהיטי יוקרה • בעבודת יד • תל אביב</p>
@@ -94,7 +94,7 @@
   <section class="about" id="about">
     <div class="container about-grid">
       <div class="about-image reveal">
-        <img src="https://picsum.photos/seed/hamilton-about/800/1000" alt="סדנת הנגרות של המילטון עיצוב" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&h=1000&q=80" alt="סדנת הנגרות של המילטון עיצוב" loading="lazy">
         <div class="about-image-badge">
           <strong>מ־2012</strong>
           <span>עובדים עץ בתל אביב</span>
@@ -241,6 +241,28 @@
     <path d="M16.02 3C9.4 3 4.03 8.36 4.03 15c0 2.36.63 4.56 1.83 6.5L3 29l7.68-2.4A11.9 11.9 0 0 0 16.02 27C22.64 27 28 21.64 28 15S22.64 3 16.02 3zm6.99 16.87c-.3.85-1.72 1.6-2.38 1.68-.6.08-1.36.11-2.2-.14-.5-.15-1.15-.36-1.98-.71-3.48-1.5-5.76-4.99-5.93-5.22-.17-.23-1.42-1.88-1.42-3.6 0-1.71.9-2.55 1.22-2.9.32-.34.7-.43.93-.43.23 0 .47 0 .67.01.22.01.5-.08.78.6.3.7.99 2.44 1.08 2.62.09.18.15.4.03.63-.12.23-.18.37-.35.57-.18.2-.37.44-.53.6-.17.17-.35.35-.15.7.2.34.9 1.5 1.95 2.44 1.34 1.2 2.47 1.58 2.82 1.75.35.18.55.15.76-.08.2-.23.87-1.02 1.1-1.37.23-.35.46-.29.76-.17.3.11 1.94.92 2.27 1.09.33.17.55.25.63.4.08.14.08.83-.22 1.68z"/>
   </svg>
 </a>
+
+<!-- ============ INTEREST LIST (lightweight "wishlist", no payment/checkout) ============ -->
+<button class="interest-float" id="interest-float" aria-label="רשימת עניין">
+  <span class="interest-icon" aria-hidden="true">🛋️</span>
+  <span class="interest-count" id="interest-count">0</span>
+</button>
+
+<div class="interest-panel-backdrop" id="interest-panel-backdrop" hidden></div>
+<aside class="interest-panel" id="interest-panel" hidden>
+  <div class="interest-panel-header">
+    <h3>רשימת העניין שלי</h3>
+    <button class="modal-close" id="interest-panel-close" aria-label="סגירה">✕</button>
+  </div>
+  <div class="interest-panel-body" id="interest-panel-body">
+    <!-- populated by script.js -->
+  </div>
+  <div class="interest-panel-footer">
+    <button class="btn btn-primary btn-full" id="interest-send-form">שליחת בקשת הצעת מחיר בטופס</button>
+    <button class="btn btn-outline btn-full" id="interest-send-whatsapp">שליחה בוואטסאפ</button>
+    <button class="btn-link" id="interest-clear">ניקוי הרשימה</button>
+  </div>
+</aside>
 
 <!-- ============ ADMIN LOGIN MODAL ============ -->
 <div class="modal-overlay" id="admin-login-overlay" hidden>
