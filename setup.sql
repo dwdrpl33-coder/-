@@ -77,8 +77,44 @@ insert into public.site_content (key, value) values
 )
 on conflict (key) do nothing;
 
+-- 4) Storage bucket להעלאת קבצי תמונה אמיתיים מפאנל הניהול (במקום הדבקת URL בלבד)
+insert into storage.buckets (id, name, public)
+values ('product-images', 'product-images', true)
+on conflict (id) do nothing;
+
+-- קריאה (הצגת התמונות באתר) פתוחה לכולם
+drop policy if exists "Public can view product images" on storage.objects;
+create policy "Public can view product images"
+  on storage.objects
+  for select
+  to anon, authenticated
+  using (bucket_id = 'product-images');
+
+-- העלאת קבצים חדשים מותרת רק למאומתים (מנהלי האתר)
+drop policy if exists "Authenticated can upload product images" on storage.objects;
+create policy "Authenticated can upload product images"
+  on storage.objects
+  for insert
+  to authenticated
+  with check (bucket_id = 'product-images');
+
+-- החלפה/מחיקה של קבצים קיימים מותרת גם היא רק למאומתים
+drop policy if exists "Authenticated can update product images" on storage.objects;
+create policy "Authenticated can update product images"
+  on storage.objects
+  for update
+  to authenticated
+  using (bucket_id = 'product-images');
+
+drop policy if exists "Authenticated can delete product images" on storage.objects;
+create policy "Authenticated can delete product images"
+  on storage.objects
+  for delete
+  to authenticated
+  using (bucket_id = 'product-images');
+
 -- ============================================================================
--- 4) יצירת משתמש מנהל — יש לבצע ידנית ב-Dashboard (לא דרך SQL):
+-- 5) יצירת משתמש מנהל — יש לבצע ידנית ב-Dashboard (לא דרך SQL):
 --    Supabase Dashboard → Authentication → Users → Add user → Create new user
 --    מלאו אימייל וסיסמה, ואשרו את המשתמש (Auto Confirm User).
 --    זהו המשתמש שאיתו תתחברו בכפתור "כניסת מנהל" בפוטר האתר.

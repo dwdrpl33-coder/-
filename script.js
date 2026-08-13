@@ -441,9 +441,44 @@ function renderAdminProducts() {
       <textarea class="p-description" rows="2">${escapeHtml(p.description)}</textarea>
       <label>קישור לתמונה</label>
       <input type="url" class="p-image" value="${escapeHtml(p.image)}">
+      <label>או העלאת קובץ מהמחשב (מחליף את הקישור למעלה)</label>
+      <input type="file" class="p-image-upload" accept="image/*">
+      <div class="form-feedback" data-upload-feedback></div>
     </div>
   `).join("");
 }
+
+/* ==========================================================================
+   Admin: image upload to Supabase Storage (bucket "product-images")
+   ========================================================================== */
+document.getElementById("edit-products-list").addEventListener("change", async (e) => {
+  const fileInput = e.target.closest(".p-image-upload");
+  if (!fileInput || !fileInput.files.length) return;
+
+  const file = fileInput.files[0];
+  const item = fileInput.closest(".admin-product-item");
+  const urlInput = item.querySelector(".p-image");
+  const feedbackEl = item.querySelector("[data-upload-feedback]");
+
+  setFormFeedback(feedbackEl, "מעלה תמונה...", "loading");
+
+  const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+  const path = `${Date.now()}-${safeName}`;
+
+  const { error: uploadError } = await supabaseClient.storage
+    .from("product-images")
+    .upload(path, file, { cacheControl: "3600", upsert: false });
+
+  if (uploadError) {
+    setFormFeedback(feedbackEl, "שגיאה בהעלאה: " + uploadError.message, "error");
+    return;
+  }
+
+  const { data } = supabaseClient.storage.from("product-images").getPublicUrl(path);
+  urlInput.value = data.publicUrl;
+  setFormFeedback(feedbackEl, 'הועלה בהצלחה ✓ לחצו "שמירת מוצרים" למטה כדי לשמור', "success");
+  fileInput.value = "";
+});
 
 async function saveSection(key, value, feedbackEl) {
   setFormFeedback(feedbackEl, "שומר...", "loading");

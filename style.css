@@ -648,6 +648,13 @@ section { scroll-margin-top: 84px; }
   padding: 4px;
   background: var(--color-cream);
 }
+.admin-section input[type="file"] {
+  width: 100%;
+  padding: 8px 0;
+  font-size: .8rem;
+  color: var(--color-charcoal-soft);
+}
+.admin-section [data-upload-feedback]:empty { margin: 0; }
 .admin-product-item {
   border: 1px solid rgba(43,38,33,.1);
   border-radius: var(--radius-sm);
